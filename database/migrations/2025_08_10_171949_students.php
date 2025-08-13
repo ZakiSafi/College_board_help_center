@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->date('date_of_birth');
-            $table->string('passport_number')->unique(); #passport or id card number
+            $table->date('date_of_birth')->default(null);
+            $table->string('passport_number')->unique()->default(null); #passport or id card number
             $table->timestamps();
         });
     }

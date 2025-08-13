@@ -9,8 +9,11 @@ Route::get('/', function () {
 })->name('welcome');
 
 Route::get('/result', [ResultController::class, 'form'])->name('result.form');
-Route::get('/result/create', [ResultController::class, 'create'])->name('result.create');
-Route::post('/result/create', [ResultController::class, 'store'])->name('result.store');
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/result/create', [ResultController::class, 'create'])->name('result.create');
+    Route::post('/result/create', [ResultController::class, 'store'])->name('result.store');
+});
+
 Route::post('/result/search', [ResultController::class, 'search'],)->name('result.search');
 Route::get('/results/{id}/download', [ResultController::class, 'download'])->name('result.download');
 

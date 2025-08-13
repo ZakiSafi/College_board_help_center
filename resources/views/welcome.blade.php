@@ -9,6 +9,7 @@
             <p class="text-lg text-gray-200 mb-6">
                 Search using your details to quickly recover your exam scores and important academic information.
             </p>
+            @guest
             <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                 <a 
                     href="{{ route('login') }}" 
@@ -22,7 +23,9 @@
                 >
                     Register
                 </a>
-            </div>
+            </div>        
+            @endguest
+            
         </div>
 <!-- Right Column: Action Card -->
 <div class="md:w-1/2 bg-white rounded-lg shadow-lg p-6 max-w-md mx-auto text-center">

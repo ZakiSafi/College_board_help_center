@@ -66,7 +66,11 @@
             <div>
                 <nav class="space-x-4">
                     <a href="{{ route('welcome') }}" class="hover:underline">Home</a>
-                    <a href="{{ route('result.create') }}" class="hover:underline">Create results</a>
+                    @auth
+                        @if(auth()->user()->role == 'admin')
+                            <a href="{{ route('result.create') }}" class="hover:underline">Create results</a>
+                        @endif
+                    @endauth
                     <a href="{{ route('result.form') }}" class="hover:underline">Check your result</a>
                 </nav>
             </div>

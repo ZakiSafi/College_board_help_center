@@ -11,6 +11,9 @@ class ResultController extends Controller
 {
     public function create()
     {
+        if (!auth()->user()->role == "admin") {
+            return abort(403, 'Unauthorized action.');
+        }
         $students = Student::all();
         return view('result.create', compact('students'));
     }
