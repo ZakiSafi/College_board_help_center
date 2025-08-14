@@ -1,0 +1,37 @@
+services:
+  - type: web
+    name: laravel-app
+    env: php
+    plan: starter
+    buildCommand: |
+      composer install --no-dev --optimize-autoloader
+      php artisan config:cache
+      php artisan route:cache
+      php artisan view:cache
+      php artisan migrate --force
+    startCommand: |
+      php-fpm -D
+      nginx -g 'daemon off;'
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        sync: false
+      - key: APP_DEBUG
+        value: false
+      - key: APP_URL
+        value: https://yourapp.onrender.com
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        fromService: mysql
+      - key: DB_DATABASE
+        value: laravel
+      - key: DB_USERNAME
+        value: laravel
+      - key: DB_PASSWORD
+        sync: false
+
+databases:
+  - name: mysql
+    plan: free
