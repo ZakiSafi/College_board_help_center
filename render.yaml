@@ -4,6 +4,10 @@ services:
     env: php
     plan: starter
     buildCommand: |
+      # Copy custom Nginx config into container
+      cp nginx.conf /etc/nginx/conf.d/default.conf
+
+      # Install dependencies and optimize Laravel
       composer install --no-dev --optimize-autoloader
       php artisan config:cache
       php artisan route:cache
@@ -24,7 +28,8 @@ services:
       - key: DB_CONNECTION
         value: mysql
       - key: DB_HOST
-        fromService: mysql
+        fromDatabase:
+          name: laravel-mysql
       - key: DB_DATABASE
         value: laravel
       - key: DB_USERNAME
@@ -33,5 +38,5 @@ services:
         sync: false
 
 databases:
-  - name: mysql
+  - name: laravel-mysql
     plan: free
