@@ -1,13 +1,10 @@
 services:
   - type: web
     name: laravel-app
-    env: php
+    env: docker
     plan: starter
     buildCommand: |
-      # Copy custom Nginx config into container
       cp nginx.conf /etc/nginx/conf.d/default.conf
-
-      # Install dependencies and optimize Laravel
       composer install --no-dev --optimize-autoloader
       php artisan config:cache
       php artisan route:cache
@@ -30,12 +27,19 @@ services:
       - key: DB_HOST
         fromDatabase:
           name: laravel-mysql
+          property: host
       - key: DB_DATABASE
-        value: laravel
+        fromDatabase:
+          name: laravel-mysql
+          property: database
       - key: DB_USERNAME
-        value: laravel
+        fromDatabase:
+          name: laravel-mysql
+          property: user
       - key: DB_PASSWORD
-        sync: false
+        fromDatabase:
+          name: laravel-mysql
+          property: password
 
 databases:
   - name: laravel-mysql
