@@ -28,12 +28,12 @@
                         <!-- PDF Viewer -->
                         <div class="relative" style="padding-top: 141.42%;"> <!-- Aspect ratio for A4 -->
                             @if($result->paper)
-                                <embed 
-                                    src="{{ Storage::url($result->paper) }}#toolbar=0&navpanes=0"
-                                    type="application/pdf"
-                                    class="absolute top-0 left-0 w-full h-full"
-                                    style="border: none;"
-                                >
+                                <iframe 
+    src="/storage/{{ $result->paper }}#toolbar=0&navpanes=0" 
+    width="100%" 
+    height="600px"
+    frameborder="0">
+</iframe>
                             @else
                                 <div class="absolute inset-0 flex flex-col items-center justify-center bg-gray-100 text-gray-500">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

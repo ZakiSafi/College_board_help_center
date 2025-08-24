@@ -1,12 +1,6 @@
 <x-layout>
     <!-- Hero Section with Form -->
     <section class="bg-[#1f4d92] p-8 min-h-[60vh] flex items-center justify-center">
-        @if ($errors->has('message'))
-    <div class="mb-4 p-3 text-red-700 bg-red-100 rounded">
-        {{ $errors->first('message') }}
-    </div>
-@endif
-
         <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-8">
             <!-- Left Column: Text Content -->
             <div class="md:w-1/2 text-center md:text-left">
